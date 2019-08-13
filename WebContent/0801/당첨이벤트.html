@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="../css/mystyle.css">
+
+<style>
+	img{
+		width:120px;
+		height:120px;
+		margin:10px;
+	}
+</style>
+
+<script>
+	$(function(){
+			$('#btn1').click(function(){
+				a = setInterval(function() {
+					$('img:first').appendTo('#result1');
+				}, 500);
+				$(this).prop('disabled', true);
+				$('#btn2').prop('disabled', false);
+				$('img').css('border', 'none');
+			});
+			
+			
+			$('#btn2').click(function(){
+				clearInterval(a);
+				$('#btn1').prop('disabled', false);
+				$(this).prop('disabled', true);
+				
+				rand = Math.floor(Math.random() * 8);
+				$('img').filter(':eq(' + rand + ')').css('border','5px solid red');
+			});
+			
+	})
+
+</script>
+</head>
+<body>
+	<div class="box">
+	- 시작 버튼을 클릭하면 이미지가 돌아간다. <br>
+	- 종료 버튼을 클릭하면 당첨 항목에 테두리를 설정한다. <br>
+	- 당첨 항목은 랜덤으로 결정한다. <br>
+	- 다시 시작 버튼을 클릭하면 테두리 설정을 해제한다.<br><br>
+	
+		<div id="result1">
+			<img src = "../images/image.1.jpg">
+			<img src = "../images/image.2.jpg">
+			<img src = "../images/image.3.jpg">
+			<img src = "../images/image.4.jpg">
+			<img src = "../images/image.5.jpg">
+			<img src = "../images/image.6.jpg">
+			<img src = "../images/image.7.jpg">
+			<img src = "../images/풍차.jpg">
+		</div>
+		
+		<button type="button" id="btn1">시작</button>
+		<button type="button" id="btn2">뽑기</button>
+		
+	</div>
+</body>
+</html>

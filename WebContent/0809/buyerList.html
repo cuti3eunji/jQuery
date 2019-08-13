@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<!-- <link rel="stylesheet" href="../css/mystyle.css"> -->
+
+<script>
+	$(function(){ 
+		$.ajax({
+			url : '/jqpro/BuyerServlet',
+			success : function(data){
+				$.each(data, function(i, e){
+					var name = $('<p>', {
+						text: e.Buyer_name
+					});
+					name.on('click',function(){
+						var target = e;
+						
+						var code = '';
+						//target 테이블찍기
+						code += "<table border='1'>";
+						code += "<tr> " + "<td>Buyer_Id</td>" 
+						code += "<td>" + target.Buyer_id + "</td> </tr>";
+						code += "<tr> " + "<td>Buyer_Name</td> <td>" + target.Buyer_name + "</td> </tr>";
+						code += "<tr> " + "<td>Buyer_Bank</td><td>" + target.Buyer_bank + "</td> </tr>";
+						code += "<tr> " + "<td>Buyer_BankNo</td><td>" + target.Buyer_bankNo + "</td></tr>";
+						code += "<tr> " + "<td>Buyer_BankName</td><td>" + target.Buyer_bankName + "</td></tr>";
+						code += "<tr> " + "<td>Buyer_Zip</td><td>" + target.Buyer_zip + "</td></tr>";
+						code += "<tr> " + "<td>Buyer_Addr</td><td>" + target.Buyer_addr + "</td></tr>";
+						code += "<tr> " + "<td>Buyer_ComTel</td><td>" + target.Buyer_comtel + "</td></tr>";
+						code += "<tr> " + "<td>Buyer_Fax</td><td>" + target.Buyer_fax + "</td></tr>";
+						code += "<tr> " + "<td>Buyer_Mail</td><zd>" + target.Buyer_mail + "</td></tr>";
+						code += "<tr> " + "<td>Buyer_Charger</td><td>" + target.Buyer_charger + "</td></tr>";
+						code += "<tr> " + "<td>Buyer_Telext</td><td>" + target.Buyer_telext + "</td></tr>";
+						code += "</table>";
+						
+						$('#result1').html(code);
+					});	//p click
+					$('#name').append(name);
+				}); //each
+			},
+			dataType : 'json'
+		})
+		
+	})
+
+</script>
+
+<style>
+	#name{
+		float : left;
+		width : 100px;
+		border : 5px dashed orange;
+	}
+	
+	#result1 {
+		width: calc(100vw - 100px);
+		border : 1px solid black;
+		
+	}
+	.box{
+		border : 1px solid black;
+	
+	}
+	#result1 + br {
+		clear: both;
+	}
+</style>
+</head>
+<body>
+	<div class="box">
+		<div id="name"></div>
+		<div id="result1"></div>
+		<br>
+	</div>
+</body>
+</html>

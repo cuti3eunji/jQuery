@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="../css/mystyle.css">
+
+<script>
+	$(function(){
+		$('#btn1').click(function(){
+			
+			a = setInterval(function() {
+				$('img:first').appendTo('#result1');
+			}, 500);
+			$(this).prop('disabled', true);
+			$(this).css('background', 'white');
+			
+			
+		});
+		
+		$('#btn2').click(function(){
+			clearInterval(a);
+			$('#btn1').prop('disabled', false);
+			$('#btn1').css('background', 'blue');
+		});
+		
+		
+		$('#result2 p').click(function(){
+			//클릭한 p태그의 문자열 가져오기
+			vtxt = $(this).text();
+			
+			vimg = $('<img>', {
+				'src' : '../images/' + vtxt + '.jpg',
+				'width' : '100px',
+				'height' : '100px'
+			})
+			
+			//클릭한 p태그의 안쪽으로 추가
+			$(this).append(vimg);
+			//$(vimg).appenTo(this);
+		});
+		
+	})
+
+</script>
+<style>
+	img{
+		width : 100px;
+		height : 100px;
+	}
+</style>
+
+</head>
+<body>
+	<div class="box">
+		<div id="result1">
+			<img src = "../images/image.1.jpg">
+			<img src = "../images/image.2.jpg">
+			<img src = "../images/image.3.jpg">
+			<img src = "../images/image.4.jpg">
+			<img src = "../images/image.5.jpg">
+			<img src = "../images/image.6.jpg">
+			<img src = "../images/image.7.jpg">
+		</div>
+		
+		<button type="button" id="btn1">실행</button>
+		<button type="button" id="btn2">종료</button>
+		
+	</div>
+	
+	<div class="box">
+	  <h3>p태그의 문자열을 클릭</h3>
+	  - 문자열로 구성된 이미지를 추가한다.
+	  <div id="result2">
+		<p title="aaa">대나무숲</p>
+		<p title="aaa">셔틀콕</p>
+		<p title="aaa">에스프레소</p>
+		<p title="aaa">카페라떼</p>
+		<p title="aaa">대나무숲</p>
+	  </div>
+	</div>
+	
+
+</body>
+</html>

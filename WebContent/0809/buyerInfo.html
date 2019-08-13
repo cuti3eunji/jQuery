@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
+
+   <link rel="stylesheet" href="../css/mystyle.css">
+
+   <style>
+      #entire {
+         width: 800px;
+         height: 500px;
+         border: 2px solid black;
+         border-collapse: collapse;
+         text-align: center;
+         margin: center;
+      }
+
+      .name {
+         width: 200px;
+         border: 1px solid black;
+      }
+
+      .name:active {
+         border: 5px solid #FFBB00;
+
+      }
+
+      #detail {
+         border-collapse: collapse;
+
+      }
+   </style>
+
+   <script src="../js/jquery-3.4.1.min.js"></script>
+
+   <script>
+      $(function () {
+         var xhr = new XMLHttpRequest();
+         $.ajax({
+            url: '/jqpro/BuyerServlet',
+            dataType: 'json',
+            success: function (data) {
+               var code = "<table id = 'entire' border = '1'>";
+               code += "<tr><td>거래처 정보</td><td>거래처 상세 정보</td></tr>";
+               $.each(data, function (i) {
+                  code += "<tr>";
+                  code += "<td class = 'name'>" + data[i].Buyer_name + "</td>";
+                  if (i === 0) {
+                     code += "<td id = 'div' rowspan = " + data.length + ">";
+                     code += "<table id = 'detail' border = '1'></table>";
+                     code += "</td>";
+                  }
+                  code += "</tr>"
+               })
+               code += "</table>";
+
+               $('body').html(code);
+
+               $('.name').hover(function () {
+                  $(this).css('background', '#FFDF24');
+               }, function () {
+                  $(this).css('background', 'none');
+               })
+
+               $('.name').click(function () {
+                  var comp = $(this).text();
+                  $.each(data, function (i) {
+                     if (comp == data[i].Buyer_name) {
+                        $('#div').html("");
+                        var res = "";
+                        $.each(data[i], function (key, value) {
+                           res += "<tr><td>" + key + "</td>";
+                           res += "<td>" + value + "</td></tr>";
+                           $('#div').html(res);
+                        })
+                     }
+                  })
+               })
+            }
+         })
+
+      })
+   </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
